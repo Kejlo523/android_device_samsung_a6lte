@@ -6,5 +6,6 @@ vendor/firmware/setfile_2p6.bin
 vendor/firmware/setfile_2p6_front.bin
 -vendor/lib/libexynoscamera.so
 -vendor/lib/libexynoscamera3.so
-
+-vendor/lib/libstainkiller.so
+-vendor/lib/libuniplugin.so
 

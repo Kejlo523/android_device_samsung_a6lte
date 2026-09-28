@@ -43,6 +43,10 @@ TARGET_DEVICE_HAS_SAMSUNG_SLSI_EXYNOS7870 := false
 # Camera
 TARGET_DEVICE_CAMERA_VER := O
 
+# The Exynos 7870 kernel uses the legacy /dev/ion ABI.  Without this Soong
+# switch, current Android builds libion as a stub whose entry points return -1.
+$(call soong_config_set_bool,libion,legacy_impl,true)
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml \
@@ -63,7 +67,7 @@ PRODUCT_COPY_FILES += \
 endif
 
 # Bootanimation
-TARGET_SCREEN_HEIGHT := 1280
+TARGET_SCREEN_HEIGHT := 1480
 TARGET_SCREEN_WIDTH := 720
 
 # Graphics
@@ -72,6 +76,8 @@ PRODUCT_AAPT_PREF_CONFIG := xhdpi
 PRODUCT_AAPT_PREBUILT_DPI := xhdpi hdpi
 
 # Bluetooth
+$(call soong_config_set,brcm_libbt,custom_bt_config,//device/samsung/a6lte:a6lte_libbt_vndcfg)
+
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl \
     android.hardware.bluetooth@1.0.vendor \
@@ -84,7 +90,7 @@ PRODUCT_COPY_FILES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service.samsung
+    android.hardware.biometrics.fingerprint-service.samsung
 
 # NFC
 PRODUCT_COPY_FILES += \
@@ -116,14 +122,11 @@ PRODUCT_PACKAGES += \
 
 # Wifi
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service \
+    android.hardware.wifi-service \
     hostapd \
     libwifi-hal \
     libwpa_client \
     wificond \
-    wifiloader \
-    wifilogd \
-    wlutil \
     wpa_supplicant \
     wpa_supplicant.conf
 

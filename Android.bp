@@ -1,0 +1,4 @@
+filegroup {
+    name: "a6lte_libbt_vndcfg",
+    srcs: ["bluetooth/libbt_vndcfg.txt"],
+}
