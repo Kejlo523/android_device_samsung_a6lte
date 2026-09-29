@@ -20,10 +20,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_o.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# RisingOS community configuration. The full GMS set exceeds the A6's fixed
-# 4 GiB system partition, while the CORE (pico GApps) variant fits.
+# RisingOS COMMUNITY build with the CORE (pico) GApps set. The full GApps
+# package exceeds the Galaxy A6's fixed 4 GiB system partition.
 WITH_GMS := true
-TARGET_USES_PICO_GAPPS := true
 WITH_ADB_INSECURE := true
 RISING_MAINTAINER := kejlo
 TARGET_ENABLE_BLUR := false
